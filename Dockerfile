@@ -1,10 +1,10 @@
 FROM centos:latest
 RUN yum update -y && \
         yum install httpd wget unzip -y && \
-        yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
+        dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
         yum install -y https://rpms.remirepo.net/enterprise/remi-release-8.rpm && \
-        yum module enable php:remi-7.2 -y && \
-        yum install php php-cli php-cgi php-curl php-json php-xml php-intl php-common php-gd php-mysqlnd php-soap php-pdo php-common \
+        dnf module enable php:remi-7.2 -y && \
+        dnf install php php-cli php-cgi php-curl php-json php-xml php-intl php-common php-gd php-mysqlnd php-soap php-pdo php-common \
         php-mcrypt php-mbstring php-zip -y && \
         mkdir /run/php-fpm && touch /run/php-fpm/www.sock && \
         chmod -R 777 /run/php-fpm/www.sock && \
