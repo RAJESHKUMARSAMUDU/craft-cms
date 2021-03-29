@@ -9,16 +9,19 @@
 
 return array(
 
-	'server' => getenv('CRAFT_DATABASE_HOST'),
+        // The database server name or IP address. Usually this is 'localhost' or '127.0.0.1'.
+        'server' => 'craftcms.cv6ki3djdtjy.us-east-1.rds.amazonaws.com',
 
-	'port' => getenv('CRAFT_DATABASE_PORT'),
+        // The name of the database to select.
+        'database' => 'craft',
 
-	'database' => getenv('CRAFT_DATABASE_NAME'),
+        // The database username to connect with.
+        'user' => 'craftcms',
 
-	'user' => getenv('CRAFT_DATABASE_USER'),
+        // The database password to connect with.
+        'password' => 'craftcms2021',
 
-	'password' => getenv('CRAFT_DATABASE_PASSWORD'),
-
-	'tablePrefix' => 'craft',
+        // The prefix to use when naming tables. This can be no more than 5 characters.
+        'tablePrefix' => 'craft',
 
 );
