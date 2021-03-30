@@ -9,13 +9,15 @@
 
 return array(
 
-	'server' => $_SERVER["CRAFT_DATABASE_HOST"],
+	'server' => getenv('CRAFT_DATABASE_HOST'),
 
-	'database' => $_SERVER["CRAFT_DATABASE_NAME"],
+	'port' => getenv('CRAFT_DATABASE_PORT'),
 
-	'user' => $_SERVER["CRAFT_DATABASE_USER"],
+	'database' => getenv('CRAFT_DATABASE_NAME'),
 
-	'password' => $_SERVER["CRAFT_DATABASE_PASSWORD"],
+	'user' => getenv('CRAFT_DATABASE_USER'),
+
+	'password' => getenv('CRAFT_DATABASE_PASSWORD'),
 
 	'tablePrefix' => 'craft',
 
