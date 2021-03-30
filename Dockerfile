@@ -22,7 +22,8 @@ RUN wget https://download.craftcdn.com/craft/2.6/2.6.2993/Craft-2.6.2993.zip && 
 
 COPY craft.conf /etc/httpd/conf.d/
 
-ADD db.php /var/www/craft/config/
+COPY db.php /var/www/craft/config/
+COPY general.php /var/www/craft/config/
 
 RUN chown -R apache:apache \
         /var/www/craft/app/ \
