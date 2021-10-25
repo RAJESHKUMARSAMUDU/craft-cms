@@ -38,3 +38,25 @@ resource "aws_elasticache_cluster" "redis" {
     Name = "craftcms-cache"
   }
 }
+
+
+
+
+
+
+
+
+"environment" : [
+      {"name": "DB_SERVER", "value": "${aws_db_instance.craftcms.endpoint}"},
+      {"name": "DB_DATABASE", "value": "craft"},
+      {"name": "DB_USER", "value": "craftcms2021"},
+      {"name": "DB_PASSWORD", "value": "craftcms2021"},
+      {"name": "DB_DRIVER", "value": "mysql"},
+      {"name": "DB_PORT", "value": "3306"},
+      {"name" : "S3_BUCKET", "value": "${aws_s3_bucket.assets.bucket}"},
+      {"name" : "CLOUDFRONT_URL", "value": "${aws_cloudfront_distribution.s3_distribution.domain_name}"},
+      {"name" : "CLOUDFRONT_DISTRIBUTION_ID", "value": "${aws_cloudfront_distribution.s3_distribution.id}"},
+      {"name" : "CLOUDFRONT_PATH_PREFIX", "value": ""},
+      {"name" : "REDIS_HOST", "value": "${aws_elasticache_cluster.redis.cache_nodes.0.address}"},
+      {"name" : "REDIS_PORT_6379_TCP", "value": "${aws_elasticache_cluster.redis.cache_nodes.0.address}:${aws_elasticache_cluster.redis.cache_nodes.0.port}"},
+      {"name" : "S3_REGION", "value": "${var.region}"}
