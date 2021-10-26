@@ -1,2 +1,41 @@
 codepipeline
 test
+
+
+resource "aws_s3_bucket" "assets" {
+  bucket = "craftcms-s3-cloudfront"
+
+  versioning {
+    enabled = true
+  }
+}
+
+
+data "aws_iam_policy_document" "s3_policy" {
+
+  statement {
+    sid = "1"
+    actions = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.assets.arn}/*"]
+
+    principals {
+      identifiers = ["${aws_cloudfront_origin_access_identity.assets_origin.iam_arn}"]
+      type = "AWS"
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "assets" {
+  bucket = "${aws_s3_bucket.assets.id}"
+  policy = "${data.aws_iam_policy_document.s3_policy.json}"
+}
+
+resource "aws_s3_bucket_public_access_block" "host_bucket" {
+  depends_on = [aws_s3_bucket_policy.assets]
+  bucket     = aws_s3_bucket.assets.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
