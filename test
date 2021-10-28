@@ -1,6 +1,31 @@
 codepipeline
 test
 
+data "aws_iam_policy_document" "s3_cloudfront_read_only" {
+  statement {
+    sid    = "AllowReadAccessForCloudFront"
+    effect = "Allow"
+
+    principals {
+      type = "AWS"
+      identifiers = [
+        for oai in var.static_site_cloud_front_oais :
+        "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${oai}"
+      ]
+    }
+
+    actions = [
+      "s3:GetObject",
+      "s3:ListBucket"
+    ]
+
+    resources = [
+      aws_s3_bucket.ymm_cloudfront_origin.arn,
+      "${aws_s3_bucket.ymm_cloudfront_origin.arn}/*"
+    ]
+  }
+}
+
 
 resource "aws_s3_bucket" "assets" {
   bucket = "craftcms-s3-cloudfront"
