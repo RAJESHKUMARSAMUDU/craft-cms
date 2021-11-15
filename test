@@ -130,3 +130,12 @@ resource "aws_s3_bucket_policy" "craftcms_Bucket_Policy" {
   bucket = aws_s3_bucket.craftcms.id
   policy = data.aws_iam_policy_document.craftcms_s3.json
 }
+
+
+
+
+    'maxSlugIncrement' => 10000,
+    'maxUploadFileSize' => 209715200,
+    'allowUpdates' => true,
+    'allowAdminChanges' => true,
+    'elevatedSessionDuration' => 0,
