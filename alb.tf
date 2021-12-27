@@ -39,3 +39,57 @@ resource "aws_lb_listener" "carftcms_alb" {
     target_group_arn = aws_lb_target_group.craftcms_tg.arn
   }
 }
+
+
+
+
+data "aws_iam_policy_document" "craftcms_s3" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type = "AWS"
+      identifiers = compact([
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
+        var.craftcms_s3_sync_task_arn
+      ])
+    }
+
+    actions = [
+      "s3:GetBucketLocation",
+      "s3:ListBucket",
+      "s3:DeleteObject",
+      "s3:GetObject",
+      "s3:GetObjectAcl",
+      "s3:PutObject",
+      "s3:PutObjectAcl"
+    ]
+    resources = [
+      aws_s3_bucket.craftcms.arn,
+      "${aws_s3_bucket.craftcms.arn}/*"
+    ]
+  }
+  statement {
+    sid    = "AllowReadAccessForCloudFront"
+    effect = "Allow"
+
+    principals {
+      type = "AWS"
+      identifiers = [
+        for oai in var.static_site_cloud_front_oais :
+        "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${oai}"
+      ]
+    }
+
+    actions = [
+      "s3:GetObject",
+      "s3:ListBucket"
+    ]
+
+    resources = [
+      aws_s3_bucket.craftcms.arn,
+      "${aws_s3_bucket.craftcms.arn}/*"
+    ]
+  }
+}
+
