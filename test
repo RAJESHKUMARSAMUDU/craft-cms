@@ -139,3 +139,31 @@ resource "aws_s3_bucket_policy" "craftcms_Bucket_Policy" {
     'allowUpdates' => true,
     'allowAdminChanges' => true,
     'elevatedSessionDuration' => 0,
+    
+    
+    
+    
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "s3:AssumeRole",
+                "s3:PutObject",
+                "s3:ListBucket",
+                "s3:GetObjectVersion",
+                "s3:GetObject",
+                "s3:GetBucketVersioning",
+                "firehose:PutRecordBatch",
+                "kinesis:PutRecords",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "sts:AssumeRole"
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+            "Sid": "AssumedByMassTransECS"
+        }
+    ]
+}
