@@ -33,6 +33,14 @@ data "aws_iam_policy_document" "s3_cloudfront_read_only" {
 }
 
 
+
+
+
+
+
+
+
+
 resource "aws_s3_bucket" "assets" {
   bucket = "craftcms-s3-cloudfront"
 
@@ -164,6 +172,63 @@ resource "aws_s3_bucket_policy" "craftcms_Bucket_Policy" {
             "Effect": "Allow",
             "Resource": "*",
             "Sid": "AssumedByMassTransECS"
+        }
+    ]
+}
+
+
+
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "acm:ListCertificates",
+                "cloudfront:GetDistribution",
+                "cloudfront:GetStreamingDistribution",
+                "cloudfront:GetDistributionConfig",
+                "cloudfront:ListDistributions",
+                "cloudfront:ListCloudFrontOriginAccessIdentities",
+                "cloudfront:CreateInvalidation",
+                "cloudfront:GetInvalidation",
+                "cloudfront:ListInvalidations",
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "iam:ListServerCertificates",
+                "sns:ListSubscriptionsByTopic",
+                "sns:ListTopics",
+                "waf:GetWebACL",
+                "waf:ListWebACLs"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::craftcms-s3-cloudfront"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::craftcms-s3-cloudfront/*"
+            ]
         }
     ]
 }
