@@ -1,5 +1,7 @@
 CannotPullContainerError: inspect image has been retried 1 time(s): failed to resolve ref
 
+"arn:aws:iam::${data.aws_caller_identity.current.account_id}:*"
+
 
 craftcms-nlb-3c3bf144492843b7.elb.us-east-1.amazonaws.com
 
