@@ -41,6 +41,11 @@
   ]
 }
 
+Make Uploads Public
+Sets the ACL for uploaded objects.
+
+
+
 
 
 
