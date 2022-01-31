@@ -8,6 +8,10 @@
 /usr/local/bin/aws rds restore-db-instance-from-db-snapshot \
                    --db-instance-identifier mynewdbinstance \
                    --db-snapshot-identifier mydbsnapshot
+                   
+                   
+                   aws rds describe-db-snapshots   --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))[0]" >>test.json
+
 
 
 
