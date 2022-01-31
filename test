@@ -8,6 +8,8 @@ TARGET_SERVER_NAME=$(getDbServerName ${MASTER_ROLE_DATABASE_URL})
 TARGET_SERVER_PORT=$(getDbServerPort ${MASTER_ROLE_DATABASE_URL})
 APP_DB_NAME=$(getDbName ${APPLICATION_DATABASE_URL})
 
+aws rds describe-db-instance-automated-backups
+
 echo Target username: ${TARGET_USERNAME}
 #echo Target password: ${TARGET_PASSWORD}
 echo Target server: ${TARGET_SERVER_NAME}
