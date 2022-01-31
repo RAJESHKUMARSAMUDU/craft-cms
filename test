@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export SNAPSHOT_IDETIFIER = /usr/local/bin/aws rds describe-db-snapshots --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))[0]" |DBSnapshotIdentifier"
+
 
 # describe db instances
 
