@@ -1,5 +1,19 @@
 #!/bin/sh
 
+
+
+TARGET_USERNAME=$(getDbUsername ${MASTER_ROLE_DATABASE_URL})
+TARGET_PASSWORD=$(getDbPassword ${MASTER_ROLE_DATABASE_URL})
+TARGET_SERVER_NAME=$(getDbServerName ${MASTER_ROLE_DATABASE_URL})
+TARGET_SERVER_PORT=$(getDbServerPort ${MASTER_ROLE_DATABASE_URL})
+APP_DB_NAME=$(getDbName ${APPLICATION_DATABASE_URL})
+
+echo Target username: ${TARGET_USERNAME}
+#echo Target password: ${TARGET_PASSWORD}
+echo Target server: ${TARGET_SERVER_NAME}
+echo Target port: ${TARGET_SERVER_PORT}
+echo Target database name: ${APP_DB_NAME}
+
 export SNAPSHOT_IDETIFIER = /usr/local/bin/aws rds describe-db-snapshots --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))[0]" |DBSnapshotIdentifier"
 
 
