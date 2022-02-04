@@ -2,19 +2,18 @@
 
 
 
-TARGET_USERNAME=$(getDbUsername ${MASTER_ROLE_DATABASE_URL})
-TARGET_PASSWORD=$(getDbPassword ${MASTER_ROLE_DATABASE_URL})
-TARGET_SERVER_NAME=$(getDbServerName ${MASTER_ROLE_DATABASE_URL})
-TARGET_SERVER_PORT=$(getDbServerPort ${MASTER_ROLE_DATABASE_URL})
-APP_DB_NAME=$(getDbName ${APPLICATION_DATABASE_URL})
+#!/bin/bash
 
-aws rds describe-db-instance-automated-backups
+SOURCE_USERNAME=$1
+SOURCE_PASSWORD=$2
+SOURCE_SERVER_NAME=$3
+SOURCE_SERVER_PORT=$4
+DESTINATION_USERNAME=$5
+DESTINATION_PASSWORD=$6
+DESTINATION_SERVER_NAME=$7
+DESTINATION_SERVER_PORT=$8
+APP_DB_NAME=$9
 
-echo Target username: ${TARGET_USERNAME}
-#echo Target password: ${TARGET_PASSWORD}
-echo Target server: ${TARGET_SERVER_NAME}
-echo Target port: ${TARGET_SERVER_PORT}
-echo Target database name: ${APP_DB_NAME}
 
 export SNAPSHOT_IDETIFIER = /usr/local/bin/aws rds describe-db-snapshots --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))[0]" |DBSnapshotIdentifier"
 
