@@ -269,3 +269,41 @@ resource "aws_s3_bucket_policy" "craftcms_Bucket_Policy" {
     ]
 }
 
+
+#!/bin/sh
+
+MYSQL_HOST=$1
+MYSQL_HOST_1=$2
+MYSQL_USER=$3
+MYSQL_PASSWORD=$4
+DATABASE_NAME=$5
+
+
+SNAPSHOT_IDENTIFIER=$(aws rds describe-db-snapshots --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))[0]|DBSnapshotIdentifier" --output=text)
+
+
+echo $SNAPSHOT_IDENTIFIER
+
+
+aws rds restore-db-instance-from-db-snapshot --db-instance-identifier nithya123  --db-snapshot-identifier ${SNAPSHOT_IDENTIFIER}  --vpc-security-group-ids sg-0e853a914be96db97 --db-subnet-group-name rds-private-subnet-group
+
+aws rds describe-db-instances --db-instance-identifier nithya123 --query 'DBInstances[*].[DBInstanceStatus]'
+
+
+while state=$(aws rds describe-db-instances --db-instance-identifier nithya123 --query 'DBInstances[*].[DBInstanceStatus]' --output=text); do
+  if [ "$state" = "available" ]; then
+    echo "available"
+    mysqldump -h${MYSQL_HOST_1} -u${MYSQL_USER} -p${MYSQL_PASSWORD} ${DATABASE_NAME} > dump.sql
+    echo "dump_done"
+    mysql -h${MYSQL_HOST} -u${MYSQL_USER} -p${MYSQL_PASSWORD} ${DATABASE_NAME} < dump.sql
+    echo "restore_done"
+    break
+  else
+    echo "unavailable"
+  fi
+  sleep 30;
+done
+
+aws rds delete-db-instance --db-instance-identifier nithya123 --skip-final-snapshot --no-delete-automated-backups
+
+
