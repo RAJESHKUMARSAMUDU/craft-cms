@@ -1,5 +1,26 @@
 #!/bin/sh
 
+RUN yum update -y \
+    && yum install -y  python3-pip mysql
+
+RUN pip3 install awscli
+
+
+ENV     AWS_ACCESS_KEY_ID="" \
+        AWS_SECRET_ACCESS_KEY="" \
+        AWS_DEFAULT_REGION="" \
+        AWS_DEFAULT_OUTPUT=""
+COPY run.sh /usr/bin/run.sh
+
+RUN chmod +x /usr/bin/run.sh
+RUN mysql --version
+
+RUN whereis aws
+
+
+RUN aws --version
+
+ENTRYPOINT [ "/usr/bin/run.sh" ]
 
 
 #!/bin/bash
