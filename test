@@ -1,5 +1,26 @@
 #!/bin/sh
 
+RESTORE_FROM_INSTANCE_ID='craftcms2021'
+
+echo "Creating manual snapshot of ${RESTORE_FROM_INSTANCE_ID}"
+SNAPSHOT_ID=$( aws rds create-db-snapshot --db-snapshot-identifier craftcms2022-manual --db-instance-identifier craftcms2021)
+
+echo $SNAPSHOT_ID
+while state=$(aws rds describe-db-snapshots --db-snapshot-identifier craftcms2022-manual --query 'DBSnapshotIdentifier[*].[DBSnapshotStatus]' --output=text); do
+  if [ "$state" = "available" ]; then
+    echo "Finished creating new snapshot craftcms2022-manual from craftcms2021"
+    break
+  else
+    echo "unavailable"
+  fi
+  sleep 30;
+done
+
+
+
+
+#!/bin/sh
+
 RUN yum update -y \
     && yum install -y  python3-pip mysql
 
