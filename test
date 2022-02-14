@@ -2,6 +2,10 @@
 
 NOW_DATE=$(date '+%Y-%m-%d-%H-%M')
 
+aws rds describe-db-snapshots   --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))[0]|DBInstanceIdentifier"
+
+aws rds describe-db-snapshots   --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))[0]|DBSnapshotIdentifier"
+
 
 
 RESTORE_FROM_INSTANCE_ID='craftcms2021'
