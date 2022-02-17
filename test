@@ -1,3 +1,10 @@
+The valid memory range for 4 vCPU is: 8GB - 30GB.
+The bucket specified for memory and CPU is invalid.The valid memory range for 4 vCPU is: 8GB - 30GB.
+
+The valid CPU range for 4GB memory is: 0.5 vCPU - 2 vCPU.
+The bucket specified for memory and CPU is invalid.The valid CPU range for 4GB memory is: 0.5 vCPU - 2 vCPU.
+
+
 #!/bin/sh
 
 NOW_DATE=$(date '+%Y-%m-%d-%H-%M')
