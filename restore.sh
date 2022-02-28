@@ -32,12 +32,13 @@ while state=$(aws rds describe-db-instances \
     echo "restore_done"
     break
   else
-    echo "unavailable"
-    
-    
-    
-    
-    aws rds describe-db-instances --db-instance-identifier raj-test --query 'DBInstances[].{ID:Endpoint.Address}' --output text
+    echo "unavailable"   
   fi
   sleep 30;
 done
+
+aws rds describe-db-instances --db-instance-identifier raj-test --query 'DBInstances[].{ID:Endpoint.Address}' --output text
+
+aws rds describe-db-instances --db-instance-identifier raj-test --query 'DBInstances[].DBName[]' --output text
+
+aws rds describe-db-instances --db-instance-identifier raj-test --query 'DBInstances[].MasterUsername[]' --output text
