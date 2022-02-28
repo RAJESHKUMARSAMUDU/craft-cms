@@ -42,3 +42,7 @@ aws rds describe-db-instances --db-instance-identifier raj-test --query 'DBInsta
 aws rds describe-db-instances --db-instance-identifier raj-test --query 'DBInstances[].DBName[]' --output text
 
 aws rds describe-db-instances --db-instance-identifier raj-test --query 'DBInstances[].MasterUsername[]' --output text
+
+echo "+------------------------------------------------------------------------------------+"
+echo "| RDS Snapshot and Restore to Temp Instance                                          |"
+echo "+------------------------------------------------------------------------------------+"
