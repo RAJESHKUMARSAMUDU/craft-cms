@@ -33,6 +33,11 @@ while state=$(aws rds describe-db-instances \
     break
   else
     echo "unavailable"
+    
+    
+    
+    
+    aws rds describe-db-instances --db-instance-identifier raj-test --query 'DBInstances[].{ID:Endpoint.Address}' --output text
   fi
   sleep 30;
 done
