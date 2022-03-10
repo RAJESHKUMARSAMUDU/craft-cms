@@ -46,3 +46,6 @@ aws rds describe-db-instances --db-instance-identifier raj-test --query 'DBInsta
 echo "+------------------------------------------------------------------------------------+"
 echo "| RDS Snapshot and Restore to Temp Instance                                          |"
 echo "+------------------------------------------------------------------------------------+"
+
+
+ aws rds describe-db-snapshots --db-instance-identifier terraform-20220221095737672600000002 --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))[0]|DBSnapshotIdentifier" --output=text
