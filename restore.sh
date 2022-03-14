@@ -49,3 +49,7 @@ echo "+-------------------------------------------------------------------------
 
 
  aws rds describe-db-snapshots --db-instance-identifier terraform-20220221095737672600000002 --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))[0]|DBSnapshotIdentifier" --output=text
+ 
+ aws rds describe-db-instances --db-instance-identifier  --query 'DBInstances[].VpcSecurityGroups[*].[VpcSecurityGroupId]' --output text
+
+aws rds describe-db-instances --db-instance-identifier  --query 'DBInstances[].DBSubnetGroup[].[DBSubnetGroupName]' --output text
