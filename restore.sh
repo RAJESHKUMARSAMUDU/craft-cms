@@ -53,3 +53,20 @@ echo "+-------------------------------------------------------------------------
  aws rds describe-db-instances --db-instance-identifier  --query 'DBInstances[].VpcSecurityGroups[*].[VpcSecurityGroupId]' --output text
 
 aws rds describe-db-instances --db-instance-identifier  --query 'DBInstances[].DBSubnetGroup[].[DBSubnetGroupName]' --output text
+
+
+    PGPASSWORD=rajesh233 pg_dump -h ${DESTINATION_HOST} -U ${MYSQL_USER} ${DATABASE_NAME} >  dump.sql
+#    echo "dump_done"
+#    echo "drop databse"
+#    PGPASSWORD=rajesh233 dropdb -h ${MYSQL_HOST_1} -U ${MYSQL_USER} ${DATABASE_NAME}
+#    echo "create databse"
+#    PGPASSWORD=rajesh233 createdb -h ${MYSQL_HOST_1} -U ${MYSQL_USER} ${DATABASE_NAME}
+    echo "dump import"
+    PGPASSWORD=rajesh233  psql -h ${MYSQL_HOST_1} -U ${MYSQL_USER} ${DATABASE_NAME} <  dump.sql
+    echo "restore_done"
+    break
+  else
+    echo "unavailable"
+
+
+
