@@ -67,6 +67,9 @@ aws rds describe-db-instances --db-instance-identifier  --query 'DBInstances[].D
     break
   else
     echo "unavailable"
+    
+    
+     -c "REVOKE CONNECT ON DATABASE ${DATABASE_NAME} FROM public;
 
 
 
