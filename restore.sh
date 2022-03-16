@@ -70,6 +70,8 @@ aws rds describe-db-instances --db-instance-identifier  --query 'DBInstances[].D
     
     
      -c "REVOKE CONNECT ON DATABASE ${DATABASE_NAME} FROM public;
+     
+     https://jarombek.com/blog/jul-26-2021-aws-synthetics-canary
 
 
 
