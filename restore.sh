@@ -72,6 +72,20 @@ aws rds describe-db-instances --db-instance-identifier  --query 'DBInstances[].D
      -c "REVOKE CONNECT ON DATABASE ${DATABASE_NAME} FROM public;
      
      https://jarombek.com/blog/jul-26-2021-aws-synthetics-canary
+     
+     
+     {
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Allow CloudwatchEvents",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "cloudwatch.amazonaws.com"
+      },
+      "Action": "sns:Publish",
+      "Resource": "arn:aws:sns:us-east-1::"
+    },
 
 
 
