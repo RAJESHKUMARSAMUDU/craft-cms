@@ -87,5 +87,15 @@ aws rds describe-db-instances --db-instance-identifier  --query 'DBInstances[].D
       "Resource": "arn:aws:sns:us-east-1::"
     },
 
+  statement {
+    sid = "lambdampermissions"
+    effect = "Allow"
+    actions = [
+      "ec2:CreateNetworkInterface",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:DeleteNetworkInterface"
+    ]
+    resources = ["*"]
+  }
 
 
