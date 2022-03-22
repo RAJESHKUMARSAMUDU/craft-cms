@@ -98,4 +98,4 @@ aws rds describe-db-instances --db-instance-identifier  --query 'DBInstances[].D
     resources = ["*"]
   }
 
-
+const process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
