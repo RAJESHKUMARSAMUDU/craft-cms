@@ -32,6 +32,26 @@ while state=$(aws rds describe-db-snapshots --db-snapshot-identifier ${RESTORE_F
 done
 
 
+const resetPage = async function(page) {
+	// Reset the page in-between
+const resetPage = async function(page) {
+	await page.setRequestInterception(true); 
+    page.on('request', (req) => {
+    if(req.resourceType() === 'image' || req.resourceType() === 'script'){
+      req.abort();
+    }
+    else {
+    req.continue();
+    } 
+	
+    try {
+        await page.goto('about:blank',{waitUntil: ['load', 'networkidle0'], timeout: 30000} );
+    } catch(ex) {
+        synthetics.addExecutionError('Unable to open a blank page ', ex);
+    }
+}
+
+
 
 
 
