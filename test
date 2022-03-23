@@ -415,3 +415,24 @@ done
 aws rds delete-db-instance --db-instance-identifier nithya123 --skip-final-snapshot --no-delete-automated-backups
 
 
+
+resource "aws_cloudwatch_metric_alarm" "service_translator_cpu_highlimit_alarm" {
+  alarm_name          = "${var.env}_${local.region_abbr}_${var.service_name}_cpu_highlimit_alarm"
+  alarm_description   = "${var.service_name} Average Service CPU utilization over last 10 minutes too high"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/ECS"
+  period              = "600"
+  statistic           = "Average"
+  threshold           = local.service_ecs_cpu_highlimit
+  alarm_actions       = [var.sns_topic_arn]
+  ok_actions          = [var.sns_topic_arn]
+
+  dimensions = {
+    ClusterName = var.cluster_name
+    ServiceName = "${var.env}-${local.region_abbr}-${var.service_name}"
+  }
+}
+
+
