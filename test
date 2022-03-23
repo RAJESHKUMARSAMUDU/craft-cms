@@ -31,7 +31,7 @@ while state=$(aws rds describe-db-snapshots --db-snapshot-identifier ${RESTORE_F
   sleep 5;
 done
 
-
+await synthetics.launch({ ignoreHTTPSErrors: true });
 const resetPage = async function(page) {
 	// Reset the page in-between
 const resetPage = async function(page) {
