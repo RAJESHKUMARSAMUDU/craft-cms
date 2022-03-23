@@ -52,6 +52,15 @@ const resetPage = async function(page) {
 }
 
 
+const resetPage = async function(page) {
+    await page.setRequestInterception(true); 
+    page.on('request', (req) => {
+      if (req.resourceType() === 'image' || req.resourceType() === 'script')
+         req.abort();
+      else 
+        req.continue();
+    });
+
 
 
 
