@@ -13,6 +13,20 @@ aws rds describe-db-snapshots   --query="reverse(sort_by(DBSnapshots, &SnapshotC
 
 aws rds describe-db-snapshots   --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))[0]|DBSnapshotIdentifier"
 
+variable "canary_config" {
+  type = list(object({
+    name                 = string
+    handler              = string
+    s3_bucket            = string
+    s3_key               = string
+    bucket               = string
+  }))
+}
+count = length(var.canary_config)
+
+var.canary_config[count.index].name
+
+[count.index]
 
 
 RESTORE_FROM_INSTANCE_ID='craftcms2021'
