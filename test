@@ -23,6 +23,11 @@ variable "canary_config" {
   }))
 }
 
+for_each = {for canary_config in var.canary_config : "${canary_config.name}" => canary_config}
+
+each.value.name
+
+[each.key]
 
 resource "aws_s3_bucket" "cw-synthetics-canary-box" {
   count  = length(var.canary_config)
