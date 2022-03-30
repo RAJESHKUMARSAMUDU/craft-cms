@@ -23,6 +23,17 @@ variable "canary_config" {
   }))
 }
 
+
+canary_config = [
+  {
+    name                 = "devgoldmanpfm"
+    handler              = "devgoldmapfm.handler"
+    s3_bucket            = "canary-handler"
+    s3_key               = "devgoldmanpfm.zip"
+    synthetics_bucket    = "devgoldmanpfm-gold"
+  },
+
+
 for_each = {for canary_config in var.canary_config : "${canary_config.name}" => canary_config}
 
 each.value.name
