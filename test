@@ -5,6 +5,12 @@ The valid CPU range for 4GB memory is: 0.5 vCPU - 2 vCPU.
 The bucket specified for memory and CPU is invalid.The valid CPU range for 4GB memory is: 0.5 vCPU - 2 vCPU.
 
 
+    resources = concat(
+      [for b in aws_s3_bucket.cw-synthetics-canary-box : b.arn],
+      [for b in aws_s3_bucket.cw-synthetics-canary-box : "${b.arn}/*"]
+    )
+
+
 #!/bin/sh
 
 NOW_DATE=$(date '+%Y-%m-%d-%H-%M')
