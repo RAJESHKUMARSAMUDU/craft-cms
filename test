@@ -30,6 +30,10 @@ variable "canary_config" {
 }
 
 
+var s3 = new AWS.S3({apiVersion: '2006-03-01', region: 'us-west-2'}); var params = { Bucket: 'bucket', Key: 'example2.txt', Body: 'Uploaded text using the promise-based method!' }; var putObjectPromise = s3.putObject(params).promise(); putObjectPromise.then(function(data) { console.log('Success'); }).catch(function(err) { console.log(err); });
+
+
+
 canary_config = [
   {
     name                 = "devgoldmanpfm"
