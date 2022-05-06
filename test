@@ -7,6 +7,8 @@
   // finally.
 }
 
+https://code4developers.com/email-alerts-when-a-docker-container-stopped-in-aws-ecs-cluster/
+
 The valid memory range for 4 vCPU is: 8GB - 30GB.
 The bucket specified for memory and CPU is invalid.The valid memory range for 4 vCPU is: 8GB - 30GB.
 
