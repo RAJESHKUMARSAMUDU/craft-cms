@@ -1,5 +1,8 @@
 https://www.qloudx.com/use-aws-cloudwatch-synthetics-canaries-to-monitor-your-production-website-ui-and-backend-apis-automatically/
 
+
+const browser = await puppeteer.launch({ args: [ '--no-sandbox', '--proxy-server=${proxy1.host}:${proxy1.port}' ], headless: false, ignoreHTTPSErrors: true })
+
 https://goldmansachs.zoom.us/j/7571091038?pwd=WCtaWFNmQzduTjYvZlBRL3ZjWkg1UT09
 
 Meeting ID: 757 109 1038
