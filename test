@@ -1,5 +1,5 @@
 https://www.qloudx.com/use-aws-cloudwatch-synthetics-canaries-to-monitor-your-production-website-ui-and-backend-apis-automatically/
-
+const browser = await puppeteer.launch({ ignoreHTTPSErrors: true, args: [ '--no-sandbox', '--proxy-server=http://egress-proxy.dev.services.finlife.com:443' ]});
 
 const browser = await puppeteer.launch({ args: [ '--no-sandbox', '--proxy-server=${proxy1.host}:${proxy1.port}' ], headless: false, ignoreHTTPSErrors: true })
 
