@@ -1,3 +1,6 @@
+
+command: ['sh', '-c', 'echo "Hello, Kubernetes!" && sleep 3600']
+
 https://www.qloudx.com/use-aws-cloudwatch-synthetics-canaries-to-monitor-your-production-website-ui-and-backend-apis-automatically/
 
  | sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' | tr '}' '\n'  | awk -F: '{print $3}'
