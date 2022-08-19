@@ -24,6 +24,14 @@ Passcode: 546002
   // finally.
 }
 
+# Prometheus config
+RUN mkdir -p /etc/prometheus/rules
+COPY --chown=nobody:nobody prometheus.yml /etc/prometheus/prometheus.yml
+COPY --chown=nobody:nobody rules/ /etc/prometheus/rules/
+# Validate rendered config as part of build
+RUN promtool check config /etc/prometheus/prometheus.yml
+
+
 https://code4developers.com/email-alerts-when-a-docker-container-stopped-in-aws-ecs-cluster/
 
 The valid memory range for 4 vCPU is: 8GB - 30GB.
