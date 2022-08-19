@@ -45,6 +45,31 @@ The bucket specified for memory and CPU is invalid.The valid CPU range for 4GB m
       [for b in aws_s3_bucket.cw-synthetics-canary-box : b.arn],
       [for b in aws_s3_bucket.cw-synthetics-canary-box : "${b.arn}/*"]
     )
+    
+    
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: dev-ue-finlife
+    prom_replica: a
+
+alerting:
+  alert_relabel_configs:
+    - action: labeldrop
+      regex: prom_replica
+  alertmanagers:
+    - static_configs:
+      - targets:
+        - "localhost:9093
+
+scrape_configs:
+
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:3001"]
+
+
 
 
 #!/bin/sh
