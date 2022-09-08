@@ -2,6 +2,13 @@
     versioning {
     enabled = true
   }
+  
+  db_cluster_parameter_group_name
+  
+    depends_on = [
+    aws_rds_cluster_parameter_group.aurora_cluster_param_group
+  ]
+
 
   lifecycle_rule {
     enabled = true
