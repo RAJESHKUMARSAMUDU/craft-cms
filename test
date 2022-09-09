@@ -3,6 +3,16 @@
     enabled = true
   }
   
+      PGPASSWORD=${TARGET_PASSWORD} psql -h ${TARGET_SERVER_NAME} \
+                                       -U ${TARGET_USERNAME} \
+                                        ${APP_DB_NAME} -c "GRANT CONNECT ON DATABASE ${APP_DB_NAME} TO public;"
+					
+
+
+    PGPASSWORD=${TARGET_PASSWORD}  psql -h ${TARGET_SERVER_NAME} \
+                                        -U ${TARGET_USERNAME} \
+                                        -d ${APP_DB_NAME} < /opt/dumps/dump-${DATABASE_DUMP_SUFFIX}-${NOW_DATE}.sql
+  
   db_cluster_parameter_group_name
   
     depends_on = [
